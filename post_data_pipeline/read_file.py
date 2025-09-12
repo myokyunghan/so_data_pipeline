@@ -32,6 +32,9 @@ def read_file(file_nm, table_nm) :
     table_df = pd.DataFrame(tot_arr, columns =arr)
 
     print("read_file : 데이터프레임 컬럼 - ", table_df.columns)
+
+
+    print("read_file : cm.col_map - ", cm.col_map)
     
     
     table_df_org_col = [x for x in cm.col_map[table_nm].keys()]

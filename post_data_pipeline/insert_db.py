@@ -86,7 +86,7 @@ def insert_db(dataset,tbl_schema, table_nm, f):
         finally:
             print("insert_db : finally - ")
             if g.insert_yn =='Y':
-                insert_db(bak_datset, table_nm, f)
+                insert_db(bak_datset, tbl_schema, table_nm, f)
             if conn:
                 conn.commit()
                 print("insert_db : finally - ","남아있는 커넥션 제거") 
