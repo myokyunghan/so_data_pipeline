@@ -4,7 +4,7 @@ import gloabl_var as g
 import insert_file_list as ifl
 from import_file import *
 
-def target_setting(dataset, table_nm, f):
+def target_setting(dataset, tbl_schema, table_nm, f):
     print("target_setting : insert_yn - ",g.insert_yn)
     print("target_setting : db 입력 최종 목표 - ", dataset.shape)
 
@@ -12,12 +12,16 @@ def target_setting(dataset, table_nm, f):
     Id_df['Id'] = Id_df['Id'].astype('int')
     min_id = Id_df['Id'].min()
     max_id = Id_df['Id'].max()
-
-    conn = psycopg2.connect(dbname='postgres', user='cslab', password='disneyland', host='143.248.248.192', port=5432)
+    
+    conn = psycopg2.connect(dbname  =   config.db_config['dbname'], 
+                            user    =   config.db_config['user'], 
+                            password=   config.db_config['password'], 
+                            host    =   config.db_config['host'], 
+                            port    =   config.db_config['port'])
     cur = conn.cursor()
     print("@@")
-    print("chk_query", "select Id from public."+table_nm+ " where Id between " + str(min_id) + " and " + str(max_id))
-    cur.execute("select Id from public."+table_nm+ " where Id between " + str(min_id) + " and " + str(max_id))
+    print("chk_query", f"select Id from {tbl_schema}.{table_nm} where Id between {str(min_id)} and {str(max_id)}")
+    cur.execute(f"select Id from {tbl_schema}.{table_nm} where Id between {str(min_id)} and {str(max_id)}")
     print("@@")
     inserted_data = cur.fetchall()
     cur.close()
@@ -35,8 +39,10 @@ def target_setting(dataset, table_nm, f):
 
     if inserted_id_chk.shape[0] == 0 :
         g.insert_yn='N'
-        ifl.insert_file_list[f] = 'Y'        
-        file1 = open("/Users/boysbeanxious/github/post_data_pipeline/insert_file_list.py", "w")
+        ifl.insert_file_list[f] = 'Y'   
+
+        pwd = os.getcwd()     
+        file1 = open(f"{pwd}/insert_file_list.py", "w")
         file1.write("%s = %s\n" % ("insert_file_list", ifl.insert_file_list))
         file1.close()
         
@@ -49,29 +55,22 @@ def target_setting(dataset, table_nm, f):
     return inserted_id_chk, inserted_id_chk_copy, loop_list
 
 
-def insert_db(dataset,table_nm, f):
+def insert_db(dataset,tbl_schema, table_nm, f):
     while g.insert_yn =='Y':
         try:
             bak_datset = dataset.copy()
             conn = None
             col_str = set_col_str(dataset,table_nm)
-            dataset, dataset_copy, loop_list = target_setting(dataset, table_nm, f)
+            dataset, dataset_copy, loop_list = target_setting(dataset, tbl_schema, table_nm, f)
             
             print("insert_db : 앞으로 입력해야할 데이터 사이즈 - ", dataset.shape)
             print("insert_db : 앞으로 수행할 루프횟수 - ", len(loop_list))
     
-            engine = sa.create_engine('postgresql://cslab:disneyland@143.248.248.192:5432/postgres', client_encoding='utf8')
+            engine = sa.create_engine(f"postgresql://{config.db_config['user']}:{config.db_config['password']}@{config.db_config['host']}:{config.db_config['port']}/{config.db_config['dbname']}", client_encoding='utf8')
             conn = engine.raw_connection()
             cursor = conn.cursor()
             for i in loop_list:
-                #engine = sa.create_engine('postgresql://boysbeanxious:tenten1010@122.37.100.225:5432/postgres', client_encoding='utf8')
-                #engine = sa.create_engine('postgresql://boysbeanxious:tenten1010@localhost:5432/postgres', client_encoding='utf8')
-                #t = time()
-                #conn = engine.raw_connection()
-                #cursor = conn.cursor()
-                sql = 'INSERT INTO public.'+table_nm+'(' + col_str+')  VALUES %s'
-                # sql = 'INSERT INTO public.postsbody (' + col_str+')  VALUES %s'
-                
+                sql = f'INSERT INTO {tbl_schema}.'+table_nm+'(' + col_str+')  VALUES %s'
                 tuples = [tuple(x) for x in dataset_copy.loc[dataset['idx']==i, :].to_numpy()]
 
                 print("insert_db : 루프번호 - ", i)

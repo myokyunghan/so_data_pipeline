@@ -1,4 +1,36 @@
 col_map = {
+    'comments': {"Id":"id",
+                "UserId":"userid",
+                "UserDisplayName":"userdisplayname",
+                "Score":"score",
+                "ContentLicense":"contentlicense",
+                "CreationDate":"creationdate",
+                "PostId":"postid",
+                "Text":"text",},
+
     'postsbody':{"Id":"id",
-                "Body":"body",}
+                "Body":"body",},
+    
+    'posts':{   "Id":"id",
+                "PostTypeId":"posttypeid",
+                "AcceptedAnswerId":"acceptedanswerid",
+                "ParentId":"parentid",
+                "CreationDate":"creationdate",
+                "Score":"score",
+                "ViewCount":"viewcount",
+                "OwnerUserId":"owneruserid",
+                "OwnerDisplayName":"ownerdisplayname",
+                "LastEditorUserId":"lasteditoruserid",
+                "LastEditorDisplayName":"lasteditordisplayname",
+                "LastEditDate":"lasteditdate",
+                "LastActivityDate":"lastactivitydate",
+                "Title":"title",
+                "Tags":"tags",
+                "AnswerCount":"answercount",
+                "CommentCount":"commentcount",
+                "FavoriteCount":"favoritecount",
+                "ClosedDate":"closeddate",
+                "CommunityOwnedDate":"communityowneddate",
+                "ContentLicense":"contentlicense"}  
+
 }

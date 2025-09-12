@@ -8,7 +8,7 @@ echo $type
 
 for file in $path/*.xml
 do	
-	#echo $file
+	echo $file
 	head=`/usr/bin/sed -n '1p' $file`
 	tail=`/usr/bin/sed -n '$p' $file`
 	
@@ -21,14 +21,15 @@ do
 		echo ""
 	else
 		echo "no header!!!"
-		/usr/bin/perl -p -i -e '$.==1 and print `cat head_tag.sh`' `echo $file`
-		/usr/bin/perl -p -i -e '$.==1 and print `cat header.sh`' `echo $file`
+		/usr/bin/perl -i -pe 'if ($.==1) { open F, "head_tag.sh"; print <F>; close F }' "$file"
+		/usr/bin/perl -i -pe 'if ($.==1) { open F, "header.sh";   print <F>; close F }' "$file"
+
 	fi
 
 	if [[ $tail = *"$type"* ]]; then
 		echo ""
 	else
 		echo "no footer!!!"
-		echo ${tail_tag} >> $file  
+		echo ${footer_tag} >> $file  
 	fi
 done            
