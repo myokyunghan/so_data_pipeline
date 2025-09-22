@@ -52,5 +52,5 @@ if __name__ == "__main__":
      tbl_schema     = sys.argv[2]
      tbl_nm         = sys.argv[3]
      main(path_dir, tbl_schema, tbl_nm)
-     # /Users/boysbeanxious/opt/anaconda3/bin/python /Users/boysbeanxious/github/so_data_pipeline/post_data_pipeline/main.py /Users/boysbeanxious/Downloads/stackoverflow.com/div_post public_2324 posts
+     # /Users/boysbeanxious/opt/anaconda3/bin/python /Users/boysbeanxious/github/so_data_pipeline/post_data_pipeline/main.py /Users/boysbeanxious/Downloads/stackoverflow.com/div_post/ public_for_2324 posts
 

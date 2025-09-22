@@ -98,7 +98,7 @@ def insert_db(dataset,tbl_schema, table_nm, f):
 
 def set_col_str(dataset, table_nm):
     d_c = dataset.columns
-    print("set_col_str : 입력받은 데이터셋의 컬럼정보 - ",d_c)
-    print("set_col_str : 입력받은 데이터셋과 맵핑되는 DB의 컬럼정보 - ",", ".join([cm.col_map[table_nm][x] for x in d_c]))
+    # print("set_col_str : 입력받은 데이터셋의 컬럼정보 - ",d_c)
+    # print("set_col_str : 입력받은 데이터셋과 맵핑되는 DB의 컬럼정보 - ",", ".join([cm.col_map[table_nm][x] for x in d_c]))
     return ", ".join([cm.col_map[table_nm][x] for x in d_c])
     
