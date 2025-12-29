@@ -1,2 +1,2 @@
 # so_data_pipeline
-<img width="721" height="462" alt="so_data_pipeline" src="https://github.com/user-attachments/assets/404ca91a-6f8d-4bdf-9a9d-dc9981ae8ffc" />
+<img width="1442" height="922" alt="so_data_pipeline" src="https://github.com/user-attachments/assets/0df295d5-9db3-4925-a31e-4c26118d4453" />
