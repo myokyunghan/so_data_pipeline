@@ -3,12 +3,16 @@
 path=$1
 type=$2
 
-echo $path
-echo $type
+
+cd hf
+
+files=($path/*.xml)
+total=${#files[@]}
+count=0
+bar_width=30
 
 for file in $path/*.xml
 do	
-	echo $file
 	head=`/usr/bin/sed -n '1p' $file`
 	tail=`/usr/bin/sed -n '$p' $file`
 	
@@ -18,18 +22,28 @@ do
 	echo $footer_tag > footer.sh
 	
 	if [[ $head = *"xml"* ]]; then
-		echo ""
+		:
 	else
-		echo "no header!!!"
 		/usr/bin/perl -i -pe 'if ($.==1) { open F, "head_tag.sh"; print <F>; close F }' "$file"
 		/usr/bin/perl -i -pe 'if ($.==1) { open F, "header.sh";   print <F>; close F }' "$file"
 
 	fi
 
 	if [[ $tail = *"$type"* ]]; then
-		echo ""
+		:
 	else
-		echo "no footer!!!"
 		echo ${footer_tag} >> $file  
 	fi
+
+	((count++))
+	percent=$((count * 100 / total))
+	filled=$((count * bar_width / total))
+
+	bar=${(l:$filled::#:)}
+
+	printf "\r[%-*s] %3d%% (%d/%d)" \
+		"$bar_width" "$bar" \
+		"$percent" "$count" "$total"
+
+	
 done            

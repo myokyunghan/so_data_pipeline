@@ -31,5 +31,25 @@ col_map = {
                 "FavoriteCount":"favoritecount",
                 "ClosedDate":"closeddate",
                 "CommunityOwnedDate":"communityowneddate",
-                "ContentLicense":"contentlicense"}  
+                "ContentLicense":"contentlicense"} ,
+
+    'votes':{   "Id":"id",
+                "PostId":"postid",
+                "VoteTypeId":"votetypeid",
+                "UserId":"userid",
+                "CreationDate":"creationdate",
+                "BountyAmount":"bountyamount"},
+    'users':{  "Id":"id",
+                "Reputation":"reputation",
+                "CreationDate":"creationdate",
+                "DisplayName":"displayname",
+                "LastAccessDate":"lastaccessdate",
+                "WebsiteUrl":"websiteurl",
+                "Location":"location",
+                "AboutMe":"aboutme",
+                "Views":"views",
+                "UpVotes":"upvotes",
+                "DownVotes":"downvotes",
+                "AccountId":"accountid",}
+
 }
