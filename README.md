@@ -15,11 +15,11 @@
 ## Repository Structure
 ```text
 .   
-├── data_pipeline/                      # Script for inserting the stack overflow dump data to postgresql database
-├── div_file/         # Script for dividing the stack overflow dump file
-├── hf/                # Script for inserting header and footer for divided xml files
+├── data_pipeline/      # Script for inserting the stack overflow dump data to postgresql database
+├── div_file/           # Script for dividing the stack overflow dump file
+├── hf/                 # Script for inserting header and footer for divided xml files
 ├── sql/                # Script for Structured Query Language to set up the postgresql 
-├── requirements.txt           # Python dependencies
+├── requirements.txt    # Python dependencies
 └── README.md
 ```
 
@@ -42,7 +42,7 @@
 
 * Before running the data pipeline, please set up the python environment and install the database(here, we use postgresql)
 
-### Install PostgreSQL
+### 1. Install PostgreSQL
 * Please follow the instructions from the official site to install postgresql on your machine: [PostgreSQL Downloads](https://www.postgresql.org/download/)
 * After installing postgresql, please create a database for the stack overflow data dump. 
   - You can use the default database 'postgres' or create a new database.
@@ -50,22 +50,22 @@
   - Please modify the following lines in the `pg_config.py` file according to your database configuration.
   ```python
             db_config={
-                'dbname'	: 'your_db_name', 			#### your db name       
-                'user'		: 'your_db_user', 				#### your db user name
-                'password'	: 'your_db_password', 		#### your db password
-                'host'		: 'your_db_host',	#### your db host
-                'port'		:  your_db_port					#### your db port
+                'dbname'	: 'your_db_name',       #### your db name       
+                'user'		: 'your_db_user',       #### your db user name
+                'password'	: 'your_db_password',   #### your db password
+                'host'		: 'your_db_host',       #### your db host
+                'port'		: 'your_db_port'		#### your db port
                 }
   ```
-### Setup Python Environment
+### 2. Setup Python Environment
 * Please follow the installation guide below to set up the python environment and install the required packages.
 
-1. Clone the repository:
+**1) Clone the repository:**
    ```bash
    git clone https://github.com/myokyunghan/so_data_pipeline.git
    cd so_data_pipeline
    ```
-2. Construct python virtual environment
+**2) Construct python virtual environment**
    ```bash
    # in the 'so_data_pipeline' directory
    brew install pyenv
@@ -78,7 +78,8 @@
    pyenv install 3.10.12
    pyenv versions
    ```
-3. Activate the virtual environment 
+**3) Activate the virtual environment**
+
    ```bash
    # in the 'so_data_pipeline' directory
    pyenv local 3.10.12
@@ -86,7 +87,8 @@
    source venv_so_data_pipeline/bin/activate
    ```
    
-4. Install dependencies
+**4) Install dependencies**
+
    ```bash
    # in the 'so_data_pipeline' directory
    pip install -r requirements.txt
