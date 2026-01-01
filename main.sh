@@ -70,6 +70,7 @@
 
 dump_path="/Users/boysbeanxious/tmp"
 current_path="/Users/boysbeanxious/github/so_data_pipeline"
+tbl_schema="public_for_2324"
 
 find /Users/boysbeanxious/tmp -maxdepth 1 -type f -name "*.xml" | while IFS= read -r file
 do
@@ -96,6 +97,10 @@ do
     echo "======================= 3. Insert to Database ========================="
     echo "======================================================================="
     echo "Insert $type dump file to Database ..."
-    venv_so_data_pipeline/bin/python data_pipeline/main.py $new_dir public_for_2324 $type
+    venv_so_data_pipeline/bin/python data_pipeline/main.py $new_dir $tbl_schema $type
+
+    if [ $type = "posts" ]; then
+        venv_so_data_pipeline/bin/python data_pipeline/main.py $tbl_schema ${type}body
+    fi
 
 done
