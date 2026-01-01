@@ -56,53 +56,66 @@
                 'host'		: 'your_db_host',       #### your db host
                 'port'		: 'your_db_port'		#### your db port
                 }
-  ```
+* Please create the tables in the database using the SQL scripts in the `sql/DDL_for_Table_Creation.sql`.
+    - You can execute the SQL script using any SQL client or command line tool.
+
 ### 2. Setup Python Environment
 * Please follow the installation guide below to set up the python environment and install the required packages.
 
-**1) Clone the repository:**
-   ```bash
-   git clone https://github.com/myokyunghan/so_data_pipeline.git
-   cd so_data_pipeline
-   ```
-**2) Construct python virtual environment**
-   ```bash
-   # in the 'so_data_pipeline' directory
-   brew install pyenv
-   echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-   echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-   echo 'eval "$(pyenv init --path)"' >> ~/.zshrc
-   echo 'eval "$(pyenv init -)"' >> ~/.zshrc
-   source ~/.zshrc
-   
-   pyenv install 3.10.12
-   pyenv versions
-   ```
-**3) Activate the virtual environment**
+    **1) Clone the repository:**
+    ```bash
+    git clone https://github.com/myokyunghan/so_data_pipeline.git
+    cd so_data_pipeline
+    ```
+    **2) Construct python virtual environment**
+    ```bash
+    # in the 'so_data_pipeline' directory
+    brew install pyenv
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+    echo 'eval "$(pyenv init --path)"' >> ~/.zshrc
+    echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+    source ~/.zshrc
+    
+    pyenv install 3.10.12
+    pyenv versions
+    ```
+    **3) Activate the virtual environment**
 
-   ```bash
-   # in the 'so_data_pipeline' directory
-   pyenv local 3.10.12
-   python3 -m venv venv_so_data_pipeline
-   source venv_so_data_pipeline/bin/activate
-   ```
-   
-**4) Install dependencies**
+    ```bash
+    # in the 'so_data_pipeline' directory
+    pyenv local 3.10.12
+    python3 -m venv venv_so_data_pipeline
+    source venv_so_data_pipeline/bin/activate
+    ```
+    
+    **4) Install dependencies**
 
-   ```bash
-   # in the 'so_data_pipeline' directory
-   pip install -r requirements.txt
-   ```
-
----
-
+    ```bash
+    # in the 'so_data_pipeline' directory
+    pip install -r requirements.txt
+    ```
 
 ---
+## Run the so_data_pipeline
+* After setting up the environment, you can run the data pipeline to insert the stack overflow dump data to the postgresql database.
+
+    ```bash
+    # in the 'so_data_pipeline' directory
+    ./main.sh
+    ```
+* The pipeline program will read the dump files, divide them in to adequite size, and then , and insert the data to the corresponding tables in the postgresql database.
+
+
 
 ## Software and Code Documentation
 
 ### System requirements
-
+* Minimum hardware requirements:
+  - CPU: 4 cores
+  - RAM: 16 GB
+  - Storage: 200 GB free disk space
+  
 ### Operating system
  * The code has been tested on the following operating systems:
   - Ubuntu 22.04 LTS
@@ -111,74 +124,4 @@
 * Python 3.10.12
 * Required Python packages are listed in `requirements.txt`
 
-### Computational Environment
-* Large language model inference used to annotate the difficulty of Stack Overflow questions was conducted on a multi-GPU workstation with the following specifications:
-  - GPU: NVIDIA RTX A5000 (24 GB VRAM) × 4
-  - CUDA version: 12.9
-  - NVIDIA driver version: 575.57.08
-* Equivalent GPU configurations with comparable memory capacity are sufficient to reproduce the analyses.
-
 ---
-
-## Large Language Model Configuration
-
-* Large language models are used to measure task difficulty and related constructs.
-  - Model: LLaMA 3.1 70B Instruct
-  - Inference framework: ollama
-  - Decoding parameters:
-    - Temperature: 0.01
-    - Maximum number of generated tokens (`num_predict`): 100
-    - Context length (`num_ctx`): 4096
-    - Stop tokens: `<s>`, `</s>`
-
-No additional decoding or sampling parameters were used.
-
----
-
-## Installation guide
-
-### Instructions
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/myokyunghan/uneven_automation.git
-   cd uneven_automation
-   ```
-2. Construct python virtual environment
-   ```bash
-   # in the 'uneven_automation' directory
-   brew install pyenv
-   echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-   echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-   echo 'eval "$(pyenv init --path)"' >> ~/.zshrc
-   echo 'eval "$(pyenv init -)"' >> ~/.zshrc
-   source ~/.zshrc
-   
-   pyenv install 3.10.12
-   pyenv versions
-   ```
-3. Activate the virtual environment 
-   ```bash
-   # in the 'uneven_automation' directory
-   pyenv local 3.10.12
-   python3 -m venv venv_uneven_automation
-   source venv_uneven_automation/bin/activate
-   ```
-   
-4. Install dependencies
-   ```bash
-   # in the 'uneven_automation' directory
-   pip install -r requirements.txt
-   ```
-   * Installation typically takes approximately 10-15 minutes on a standard desktop comuter, excluding GPU driver and CUDA installation.
-
-
-
-
-* Download the dump file from Stack Overflow
-* Install postgresql for your own database 
-* Create the tables 
-* Install python
-* Set the configuration file  
-* Insert the dump data with so_data_pipeline project
-    * we automatically divide the dump file 
-    * and then insert the data to the database 
